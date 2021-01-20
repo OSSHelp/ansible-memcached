@@ -1,0 +1,6 @@
+---
+- name: memcached.conf configuration
+  template:
+    src: memcached_conf.j2
+    dest: "{{ memcached_conf_path }}"
+  notify: restart memcached service

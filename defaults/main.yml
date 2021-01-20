@@ -1,0 +1,16 @@
+---
+memcached_setup: full
+memcached_packages:
+  - memcached
+
+memcached_conf_path: /etc/memcached.conf
+memcached_drop_in_path: /etc/systemd/system/memcached.service.d
+memcached_drop_in_conf: override.conf
+memcached_pid_file: /var/run/memcached/memcached.pid
+
+memcached_memory: 64m
+memcached_port: 11211
+memcached_listen: '0.0.0.0,::'
+memcached_connlimit: 1024
+memcached_threads: 4
+memcached_debug: false

@@ -1,0 +1,7 @@
+[Service]
+User=root
+Group=memcache
+RuntimeDirectory=memcached
+RuntimeDirectoryMode=0775
+ExecStart=
+ExecStart=/usr/share/memcached/scripts/systemd-memcached-wrapper "{{ memcached_conf_path }}"

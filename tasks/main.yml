@@ -1,0 +1,8 @@
+---
+- name: install
+  include_tasks: install.yml
+  when: memcached_setup == "full" or memcached_setup == "install"
+
+- name: configure
+  include_tasks: configure.yml
+  when: memcached_setup == "full" or memcached_setup == "configure"

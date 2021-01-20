@@ -1,0 +1,9 @@
+---
+- name: reload memcached unit
+  systemd:
+    daemon_reload: yes
+
+- name: restart memcached service
+  systemd:
+    name: memcached
+    state: restarted

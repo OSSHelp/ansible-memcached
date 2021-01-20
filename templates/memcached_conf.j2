@@ -1,0 +1,27 @@
+# Run memcached as a daemon.
+-d
+
+# Use up to 64 Megabytes by default
+-m {{ memcached_memory }}
+
+# Default connection port is 11211
+-p {{ memcached_port }}
+
+# Default user
+-u memcache
+
+# Listen interface
+-l {{ memcached_listen }}
+
+# Pidfile path
+-P {{ memcached_pid_file }}
+
+# Max simultaneous connections
+-c {{ memcached_connlimit }}
+
+# Number of threads to use
+-t {{ memcached_threads }}
+
+{% if memcached_debug %}# Debug verbosity
+-vv
+{% endif %}

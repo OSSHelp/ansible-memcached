@@ -1,0 +1,32 @@
+---
+- name: gather required facts
+  setup:
+    gather_subset: [min]
+  when: ansible_distribution_release is not defined
+
+- name: package installation
+  apt:
+    name: "{{ memcached_packages }}"
+    update_cache: true
+    cache_valid_time: 86400
+
+- name: "create dir for override"
+  file:
+    path: "{{ memcached_drop_in_path }}"
+    state: directory
+  when: ansible_distribution_release == 'xenial'
+
+- name: create memcached.service override
+  template:
+    src: override.conf.j2
+    dest: "{{ memcached_drop_in_path }}/{{ memcached_drop_in_conf }}"
+  when: ansible_distribution_release == 'xenial'
+  notify:
+    - reload memcached unit
+    - restart memcached service
+
+- name: enable memcached service
+  service:
+    name: memcached
+    enabled: yes
+    state: started
